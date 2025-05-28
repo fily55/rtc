@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Install packages and then run the development server:
 
 ```bash
 npm run dev
@@ -16,21 +16,18 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Task
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This is a very simple WebRTC frontend application.
 
-## Learn More
+This app has 2 video elements that are connected to a RTC peer connection. The user is publishing to themselves.
 
-To learn more about Next.js, take a look at the following resources:
+Once you start the app, you will see a "Start A/V" button. This will enable your devices.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+After this you are able to start the RTC connection by clicking "Call". To end the call, simply click "Hang Up" and you will be back to square one.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Once you have activated your camera and microphone, you can mute and un mute both audio and video.
 
-## Deploy on Vercel
+The app is using basic redux toolkit with `createAsyncThunk` to handle async code.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This app is not pretty. I decided not to have any icons or animation for a quick prototype.
