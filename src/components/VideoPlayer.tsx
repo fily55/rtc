@@ -10,8 +10,22 @@ export const VideoPlayer = ({
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current && stream && stream.getTracks().length > 0) {
+    if (videoRef.current && stream) {
       videoRef.current.srcObject = stream;
+
+      const handleTrackChange = () => {
+        if (videoRef.current && stream.getTracks().length > 0) {
+          videoRef.current.srcObject = stream;
+        }
+      };
+
+      stream.addEventListener("addtrack", handleTrackChange);
+      stream.addEventListener("removetrack", handleTrackChange);
+
+      return () => {
+        stream.removeEventListener("addtrack", handleTrackChange);
+        stream.removeEventListener("removetrack", handleTrackChange);
+      };
     }
   }, [stream]);
 

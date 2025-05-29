@@ -28,6 +28,10 @@ After this you are able to start the RTC connection by clicking "Call". To end t
 
 Once you have activated your camera and microphone, you can mute and un mute both audio and video.
 
-The app is using basic redux toolkit with `createAsyncThunk` to handle async code.
-
 This app is not pretty. I decided not to have any icons or animation for a quick prototype.
+
+# Notes
+
+The first commit used a very simple redux toolkit code.
+
+The second (latest) commit is using redux saga with strict type definition.

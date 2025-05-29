@@ -1,5 +1,6 @@
-import { AnyAction } from '@reduxjs/toolkit';
 import { produce } from 'immer';
+import { Action } from 'redux';
+import { MediaStreamAction } from './mediaStreamTypes';
 
 interface MediaStreamState {
   client: MediaStream | null;
@@ -17,19 +18,27 @@ const initialState: MediaStreamState = {
   peer2: null,
 };
 
-const mediaStreamReducer = (state = initialState, action: AnyAction) => {
+const isMediaStreamAction = (action: Action): action is MediaStreamAction => {
+  return action.type.startsWith('[media]');
+};
+
+const mediaStreamReducer = (state = initialState, action: Action) => {
+  if (!isMediaStreamAction(action)) return state;
+  
   return produce(state, (draft) => {
     switch (action.type) {
       case '[media] client stream received':
         draft.client = action.payload;
         draft.hasRtcStarted = action.payload !== null;
         break;
-      case '[media] publisher stream received':
-        draft.publisher = action.payload;
+      case '[media] add published tracks':
+        draft.publisher?.addTrack(action.payload.track);
         break;
-      case '[media] peer connections established':
+      case '[media] set up peer connections':
         draft.peer1 = action.payload.peer1;
         draft.peer2 = action.payload.peer2;
+        draft.publisher = new MediaStream();
+        draft.client?.getTracks().forEach((track: MediaStreamTrack) => draft.peer1!.addTrack(track));
         break;
       case '[media] call reset requested':
         draft.peer1?.close();

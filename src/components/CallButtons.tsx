@@ -1,14 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   selectClientStream,
   selectPeer1,
   selectHasRtcStarted,
 } from "../store/selectors/mediaStreamSelectors";
 import { useCallback, useState } from "react";
-import { AppDispatch } from "../store/store";
+import { useMediaDispatch } from "../store/useMediaDispatch";
 
 export const CallButtons = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useMediaDispatch();
   const hasRtcStarted = useSelector(selectHasRtcStarted);
   const clientStream = useSelector(selectClientStream);
   const peer1 = useSelector(selectPeer1);
