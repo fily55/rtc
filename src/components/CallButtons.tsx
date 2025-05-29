@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { resetCall, startCall, startAV } from "../store/mediaStreamReducer";
 import {
   selectClientStream,
   selectPeer1,
@@ -17,16 +16,16 @@ export const CallButtons = () => {
   const [isVideoMuted, setIsVideoMuted] = useState(false);
 
   const onStartCamera = useCallback(async () => {
-    dispatch(startAV());
+    dispatch({ type: "[media] start av requested" });
   }, [dispatch]);
 
   const onCall = useCallback(async () => {
     if (!clientStream) return;
-    dispatch(startCall());
+    dispatch({ type: "[media] start call requested" });
   }, [dispatch, clientStream]);
 
   const onHangUp = useCallback(() => {
-    dispatch(resetCall());
+    dispatch({ type: "[media] call reset requested" });
   }, [dispatch]);
 
   const toggleAudioMute = useCallback(() => {
